@@ -1,4 +1,4 @@
-# DATA 101: Data Science for Humanities and Social Sciences (Fall 2025) #
+# DATA 101: Data Science for the Humanities and Social Sciences (Fall 2025) #
 
 |  | [Eren Bilen](http://ernbilen.github.io) |
 |--------------|--------------------------------------------------------------|

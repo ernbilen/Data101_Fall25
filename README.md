@@ -9,8 +9,8 @@
 
 * **Meeting day/time**: M-Th 1:30-2:45pm, Althouse 201
 * Office hours also available by appointment.
-* **QRA:** Malena Goldman [malkagom@dickinson.edu](mailto:malkagom@dickinson.edu)
-* **QRA Office Hours:** TBA
+* **QRA:** Malena Goldman [malkagom@dickinson.edu](mailto:malkagom@dickinson.edu)	   
+* **QRA Office Hours:** <br>Su-Th 9-10:30pm @Library classroom 1 <br> M-T 9-10pm @Tome 227
 
 ## Course description ##
 

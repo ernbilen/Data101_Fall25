@@ -57,7 +57,7 @@ We can check frequencies over time across many books: https://books.google.com/n
 https://www.youtube.com/watch?v=fCn8zs912OE
 
 <center>
-  <img src="Zipf.png" width="70%" style="border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2);">
+  <img src="zipf.png" width="70%" style="border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2);">
 </center>
 
 ---

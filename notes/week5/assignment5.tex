@@ -1,0 +1,105 @@
+\documentclass[12pt]{article}
+\usepackage[top=0.75in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage[table]{xcolor} % for row colors
+\usepackage{emoji}
+
+\hypersetup{colorlinks=true, urlcolor=blue, linkcolor=blue}
+
+\begin{document}
+
+\vspace*{-0.8cm}
+\begin{flushright}
+\makebox[3in][l]{\textbf{Name(s):} \hrulefill}
+\end{flushright}
+\vspace{.16cm}
+
+\begin{center}
+{\LARGE DATA 101 Assignment 5: Python}\\[6pt]
+\small Work in teams of 2
+\end{center}
+
+\bigskip
+\noindent
+\textbf{Instructions.} Create a new Jupyter Notebook. Remember to use the cell types Markdown for text explanations/titles and Code for Python code. Show all your text explanations and code. Once you complete the assignment save your file as \texttt{python\_is\_fun.ipynb}. Print your jupyter notebook file and bring your assignment with you to class on Monday. To export your notebook, you can click on \texttt{File → Save and export notebook as → HTML (.html)} (don't forget to allow for pop-ups) then print the \texttt{.html} file using any browser. (you can double click on an \texttt{.html} file.)
+
+\bigskip
+\hrule
+\bigskip
+
+\begin{enumerate}[leftmargin=1.2em, label=\textbf{\arabic*.}]
+
+  \item
+  Convert your first cell into Markdown type and do the following:
+  \begin{enumerate}
+    \item Write a bold title: \texttt{Here begins the assignment}. \vspace{1.5cm}
+    \item Add a short italicized motto for yourself (e.g., could be short like \textit{Code $>$ Sleep}, or something longer like a quote). \vspace{1.5cm}
+    \item Make a bulleted list of your 3 hobbies. \vspace{2cm}
+    \item Write and display 3 of your favorite emojis. (e.g., \emoji{snake}, \emoji{musical-note}, \emoji{soccer})\vspace{1.5cm}
+  \end{enumerate}
+
+\item Suppose you are budgeting for snacks. A burger costs 6.75, fries 2.50, and a soda 1.75. 
+\begin{enumerate}
+  \item Create variables for each item, and compute the total cost for 3 burgers, 2 fries, and 4 sodas. \vspace{2.5cm}
+  \item Let $x$, $y$, and $z$ be the number of burgers, fries, and sodas you want to order. Write code that multiplies each by its price and computes the new total. \vspace{2cm}
+  \item Write an if--else that prints \texttt{"too expensive"} if the total from (b) is greater than \$25, else print \texttt{"affordable"}. \vspace{2cm}
+\end{enumerate}
+
+
+
+  \item
+  \begin{enumerate}
+    \item Write a for loop that prints:  
+\begin{verbatim}
+Python is fun! (1)
+Python is fun! (2)
+Python is fun! (3)
+Python is fun! (4)
+Python is fun! (5)
+\end{verbatim}
+    \vspace{2cm}
+    \item Write a for loop that prints the squares of numbers 1 through 10 in the form:  
+\begin{verbatim}
+1 squared is 1
+2 squared is 4
+...
+10 squared is 100
+\end{verbatim}
+    \vspace{1cm}
+  \end{enumerate}
+
+  \item 
+  \begin{enumerate}
+    \item Write a function \texttt{cheer(name)} that takes someone’s name and returns a string like \texttt{"Go Eren!!!"}. Test it with three different names. \vspace{2cm}
+    \item Write a function \texttt{echo(word, times)} that repeats a word the given number of times with spaces in between. Example: \texttt{echo("hi", 3)} $\to$ \texttt{"hi hi hi"}. \vspace{3cm}
+  \end{enumerate}
+
+  \item
+  \begin{enumerate}
+    \item Import NumPy. Simulate rolling a six-sided die 100 times. Show the first 10 rolls and compute the mean roll. (\textit{Hint: Use np.random.randint()}). Read more \href{https://numpy.org/doc/2.3/reference/random/generated/numpy.random.randint.html}{here}. \vspace{2.5cm}
+    \item Simulate heights of 200 people with mean = 170 cm and SD = 10. Round to 1 decimal and print the tallest height. (\textit{Hint: Use the numpy function we used in class.}) \vspace{2.5cm}
+  \end{enumerate}
+
+  \item Read in the following data from Mario Kart to your python session:  
+ \url{https://github.com/rfordatascience/tidytuesday/raw/refs/heads/main/data/2021/2021-05-25/records.csv} Name your dataframe object as \texttt{df}.
+  \begin{enumerate}
+    \item Show the first 7 rows. \vspace{1.5cm}
+    \item Show how many rows and columns the dataset has. \vspace{1.5cm}
+    \item Find the mean \texttt{record\_duration}. \vspace{1.5cm}
+    \item Repeat (c) but for the Rainbow Road track only. \vspace{1.5cm}
+    \item Repeat (c) for \texttt{type = Single Lap and Three Lap}. \vspace{1.5cm}
+  \end{enumerate}
+
+\clearpage
+  \item
+  \begin{enumerate}
+    \item Make a histogram of \texttt{record\_duration}. Choose a color you like and make sure to label your axes. \vspace{2.5cm}
+    \item Make a scatterplot of x=\texttt{time} and y=\texttt{record\_duration}. Choose a color your like for the dots and make sure to label your axes. \vspace{3cm}
+  \end{enumerate}
+
+
+\end{enumerate}
+
+\end{document}

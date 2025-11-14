@@ -1,0 +1,78 @@
+---
+title: "Week 11: Word frequency over time 📖"
+author: "Eren Bilen, Assistant Professor of Data Analytics"
+institute: "Data 101: Data Science for Humanities and Social Sciences <br> Dickinson College"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    includes:
+      after_body: insert-logo.html
+editor_options: 
+  chunk_output_type: console
+---
+
+
+# Words, words words...
+
+- How many words are there in English?
+- How many does an average native speaker know? Use?
+
+
+---
+count: false
+
+# Words, words words...
+
+- How many words are there in English? <br> <span style="color:blue;">About 54,000 per Webster Dictionary</span>
+- How many does an average native speaker know? Use? <br> <span style="color:blue;">Roughly 20,000</span>
+
+--
+
+Language changes:
+
+- Language is a dynamic system reflecting culture, technology, and social values.
+- Words emerge, shift meaning, or disappear as societies evolve.
+- Examples:
+  - “Gay” once meant “joyful,” now refers primarily to sexual orientation.
+  - “Swipe” gained a new digital meaning through smartphones.
+  - “Thou” disappeared as pronouns simplified in Modern English.
+  
+--
+
+We can check frequencies over time across many books: https://books.google.com/ngrams/?utm_source=chatgpt.com
+
+
+---
+
+# Zipf's Law
+
+- A strange but very robust phenomenon where frequency of each word is equally proportional to its rank.
+
+- Eg, The second most common word appears 1/2 times the top; the third occurs 1/3 etc.
+
+https://www.youtube.com/watch?v=fCn8zs912OE
+
+<center>
+  <img src="zipf.png" width="70%" style="border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2);">
+</center>
+
+---
+
+
+# Beyond frequency: Finding fingerprints
+
+- Every author leaves a measurable statistical “signature.”
+- Function words (the, and, of, to) vary subtly but <u>consistently.</u>
+- Stylometry compares these distributions to identify:
+  - authorship disputes (Federalist Papers, Shakespeare)
+  - consistency within one writer’s works.
+  
+  
+Question: Can we identify a text’s author using only word frequencies?
+
+Let's start jupyter and start analyzing some books!
+

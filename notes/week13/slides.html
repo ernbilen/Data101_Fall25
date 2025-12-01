@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Week 14: Data Science and Music 🎵🎸👩‍🎤</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Eren Bilen, Assistant Professor of Data Analytics" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Week 14: Data Science and Music 🎵🎸👩‍🎤
+]
+.author[
+### Eren Bilen, Assistant Professor of Data Analytics
+]
+.institute[
+### Data 101: Data Science for Humanities and Social Sciences <br> Dickinson College
+]
+
+---
+
+
+
+
+
+# Music... what is it?
+
+--
+
+- A collection of sounds to produce harmony, melodies, and emotions.
+
+--
+
+- Sound is quantifiable. How?
+  - Every sound is a vibration in a certain frequency.
+    - Frequency is measured in Hertz (Hz). Humans can hear between 20 to 20,000 Hz. Dogs 40 to 60,000 Hz. 
+  - Higher the sound/pitch, higher frequency. We can measure this.
+  - Notes are sorted by pitch: C natural scale: C D E F G A B
+  - Rythm and tempo are also measurable. Eg, a song might be 120 bpm (beats per minute)
+  
+---
+
+# How does it work in Python?
+
+- Let's read in real music into python. 
+- We need to import songs. Watch out for copyright! 
+- GTZAN dataset contains 100 free songs from 10 genres. Songs were collected between 2000-01. Publicly available [here](https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification).
+
+
+```python
+import librosa # very popular package to analyze audio files
+# Read a reggae song
+audio = "reggae.00010.wav" # waveform audio file
+data, sr = librosa.load(audio) # data has freqs, sr is sampling rate
+```
+
+<audio src="reggae.00010.wav" type="audio/wav" controls></audio>
+
+---
+
+
+```python
+# Wave form of the audio
+import matplotlib.pyplot as plt
+plt.figure(figsize=(7,4))
+librosa.display.waveshow(data,color="#2B4F72", alpha = 0.5);
+plt.ylabel('amplitude')
+plt.title('Redemption Song by Bob Marley')
+plt.show()
+```
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-3-1.png" width="672" /&gt;
+
+---
+
+
+```python
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-4-3.png" width="672" /&gt;
+
+---
+
+# Song 2
+
+
+
+<audio src="blues.00001.wav" type="audio/wav" controls></audio>
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-7-1.png" width="672" /&gt;
+
+---
+
+```python
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-8-3.png" width="672" /&gt;
+
+---
+
+# Song 3
+
+
+
+<audio src="classical.00001.wav" type="audio/wav" controls></audio>
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-11-1.png" width="672" /&gt;
+
+---
+
+```python
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-12-3.png" width="672" /&gt;
+
+---
+
+
+# Song 4
+
+
+
+<audio src="country.00001.wav" type="audio/wav" controls></audio>
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-15-1.png" width="672" /&gt;
+
+---
+
+```python
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-16-3.png" width="672" /&gt;
+
+---
+
+# Song 5
+
+
+
+<audio src="disco.00001.wav" type="audio/wav" controls></audio>
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-19-1.png" width="672" /&gt;
+
+---
+
+```python
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-20-3.png" width="672" /&gt;
+
+---
+
+# Song 6
+
+
+
+<audio src="hiphop.00001.wav" type="audio/wav" controls></audio>
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-23-1.png" width="672" /&gt;
+
+---
+
+```python
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-24-3.png" width="672" /&gt;
+
+
+---
+
+# Song 7
+
+
+
+<audio src="jazz.00001.wav" type="audio/wav" controls></audio>
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-27-1.png" width="672" /&gt;
+
+---
+
+```python
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-28-3.png" width="672" /&gt;
+
+---
+
+# Song 8
+
+
+
+<audio src="metal.00001.wav" type="audio/wav" controls></audio>
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-31-1.png" width="672" /&gt;
+
+---
+
+```python
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-32-3.png" width="672" /&gt;
+
+
+---
+
+# Song 9
+
+
+
+<audio src="pop.00001.wav" type="audio/wav" controls></audio>
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-35-1.png" width="672" /&gt;
+
+---
+
+```python
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-36-3.png" width="672" /&gt;
+
+
+---
+
+# Song 10
+
+
+
+<audio src="reggae.00001.wav" type="audio/wav" controls></audio>
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-39-1.png" width="672" /&gt;
+
+---
+
+```python
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-40-3.png" width="672" /&gt;
+
+
+---
+
+# Song 11
+
+
+
+<audio src="rock.00026.wav" type="audio/wav" controls></audio>
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-43-1.png" width="672" /&gt;
+
+---
+
+```python
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-44-3.png" width="672" /&gt;
+
+
+
+---
+
+# Bonus: A song covered by me!
+
+
+
+<audio src="happyjusttodance.m4a" type="audio/wav" controls></audio>
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-47-1.png" width="672" /&gt;
+
+---
+
+```python
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-48-3.png" width="672" /&gt;
+
+---
+
+&lt;div style="font-size:10px; line-height:1"&gt;
+&lt;style&gt;
+.slide-specific pre code {
+  font-size: 10px !important;
+}
+&lt;/style&gt;
+
+&lt;div class="slide-specific"&gt;
+
+
+
+
+```python
+import librosa
+import numpy as np
+import pandas as pd
+
+def extract_features(filename):
+    audio, sr = librosa.load(filename, duration=30)
+
+    # Important: use keyword arguments so it works with new librosa versions
+    tempo = librosa.beat.tempo(y=audio, sr=sr)[0]
+    chroma = np.mean(librosa.feature.chroma_stft(y=audio, sr=sr))
+    rmse = np.mean(librosa.feature.rms(y=audio))
+    centroid = np.mean(librosa.feature.spectral_centroid(y=audio, sr=sr))
+    bandwidth = np.mean(librosa.feature.spectral_bandwidth(y=audio, sr=sr))
+    rolloff = np.mean(librosa.feature.spectral_rolloff(y=audio, sr=sr))
+    zcr = np.mean(librosa.feature.zero_crossing_rate(y=audio))
+
+    mfcc_values = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=5)
+    mfcc1 = np.mean(mfcc_values[0])
+    mfcc2 = np.mean(mfcc_values[1])
+    mfcc3 = np.mean(mfcc_values[2])
+    mfcc4 = np.mean(mfcc_values[3])
+    mfcc5 = np.mean(mfcc_values[4])
+
+    return pd.Series({
+        "tempo": tempo,
+        "chroma": chroma,
+        "rmse": rmse,
+        "centroid": centroid,
+        "bandwidth": bandwidth,
+        "rolloff": rolloff,
+        "zero_crossing_rate": zcr,
+        "mfcc1": mfcc1,
+        "mfcc2": mfcc2,
+        "mfcc3": mfcc3,
+        "mfcc4": mfcc4,
+        "mfcc5": mfcc5
+    })
+
+# ---------------------------------------------------------------
+# Extract features for the songs
+blues = extract_features("/Users/eren/Downloads/Data/genres_original/blues/blues.00001.wav")
+classical = extract_features("/Users/eren/Downloads/Data/genres_original/classical/classical.00001.wav")
+jazz = extract_features("/Users/eren/Downloads/Data/genres_original/jazz/jazz.00001.wav")
+country = extract_features("/Users/eren/Downloads/Data/genres_original/country/country.00001.wav")
+disco = extract_features("/Users/eren/Downloads/Data/genres_original/disco/disco.00001.wav")
+rock = extract_features("/Users/eren/Downloads/Data/genres_original/rock/rock.00026.wav")
+recording = extract_features("/Users/eren/Downloads/happyjusttodance.m4a")
+
+songs_df = pd.DataFrame({
+    "blues": blues,
+    "classical": classical,
+    "jazz": jazz,
+    "country": country,
+    "disco": disco,
+    "rock": rock,
+    "recording": recording
+})
+```
+
+---
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-51-5.png" width="576" /&gt;
+
+---
+
+# Other interesting applications:
+
+- With text data, we said: Every author leaves a measurable statistical “signature.” (stylometry)
+  - Same is true with music!
+  - Note level analysis: number of notes, chords, changes in keys...
+- Genres over time? Has pop been the same over the last century?
+- Machine learning and AI: Google's Bach bot
+- Music and culture: The development of western music and eastern music
+- Music lyrics (text analysis)
+
+🤑 Music recommendation algorithms, song recognizer apps, eg, Shazam
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(https://pbs.twimg.com/profile_images/1121082444596350976/IH7Sq90N_400x400.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 110px;
+  height: 128px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

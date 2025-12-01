@@ -1,0 +1,709 @@
+---
+title: "Week 14: Data Science and Music 🎵🎸👩‍🎤"
+author: "Eren Bilen, Assistant Professor of Data Analytics"
+institute: "Data 101: Data Science for Humanities and Social Sciences <br> Dickinson College"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    includes:
+      after_body: insert-logo.html
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(reticulate)
+
+# point reticulate to the exact Python you want
+py <- "/Users/eren/anaconda3/envs/r-reticulate/bin/python"
+Sys.setenv(RETICULATE_PYTHON = py)
+use_python(py, required = TRUE)
+
+# make knitr use the same Python for python-engine chunks
+knitr::opts_chunk$set(engine.path = list(python = py))
+
+#use_python("C:/Users/Eren/AppData/Local/r-miniconda/envs/r-reticulate/python.exe", required = TRUE)
+
+# install once if needed (safe if already installed)
+#try(py_install(c("pandas", "matplotlib", "seaborn"), pip = TRUE), silent = TRUE)
+
+#py_config()   # sanity check in knit log
+```
+
+
+# Music... what is it?
+
+--
+
+- A collection of sounds to produce harmony, melodies, and emotions.
+
+--
+
+- Sound is quantifiable. How?
+  - Every sound is a vibration in a certain frequency.
+    - Frequency is measured in Hertz (Hz). Humans can hear between 20 to 20,000 Hz. Dogs 40 to 60,000 Hz. 
+  - Higher the sound/pitch, higher frequency. We can measure this.
+  - Notes are sorted by pitch: C natural scale: C D E F G A B
+  - Rythm and tempo are also measurable. Eg, a song might be 120 bpm (beats per minute)
+  
+---
+
+# How does it work in Python?
+
+- Let's read in real music into python. 
+- We need to import songs. Watch out for copyright! 
+- GTZAN dataset contains 100 free songs from 10 genres. Songs were collected between 2000-01. Publicly available [here](https://www.kaggle.com/datasets/andradaolteanu/gtzan-dataset-music-genre-classification).
+
+```{python}
+import librosa # very popular package to analyze audio files
+# Read a reggae song
+audio = "reggae.00010.wav" # waveform audio file
+data, sr = librosa.load(audio) # data has freqs, sr is sampling rate
+```
+
+```{r, echo=FALSE}
+library(htmltools)
+audio_file <- "reggae.00010.wav"   # put the file in the same folder
+htmltools::tags$audio(
+  src = audio_file,
+  type = "audio/wav",
+  controls = NA
+)
+```
+
+---
+
+```{python}
+# Wave form of the audio
+import matplotlib.pyplot as plt
+plt.figure(figsize=(7,4))
+librosa.display.waveshow(data,color="#2B4F72", alpha = 0.5);
+plt.ylabel('amplitude')
+plt.title('Redemption Song by Bob Marley')
+plt.show()
+```
+
+---
+
+```{python}
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+---
+
+# Song 2
+
+```{python, echo=FALSE}
+import librosa # very popular package to analyze audio files
+# Read the song
+audio = "blues.00001.wav" # waveform audio file
+data, sr = librosa.load(audio) # data has freqs, sr is sampling rate
+```
+
+```{r, echo=FALSE}
+library(htmltools)
+audio_file <- "blues.00001.wav"   # put the file in the same folder
+htmltools::tags$audio(
+  src = audio_file,
+  type = "audio/wav",
+  controls = NA
+)
+```
+
+```{python, echo=FALSE}
+# Wave form of the audio
+import matplotlib.pyplot as plt
+plt.figure(figsize=(7,4))
+librosa.display.waveshow(data,color="#2B4F72", alpha = 0.5);
+plt.ylabel('amplitude')
+plt.title('A standard Blues song')
+plt.show()
+```
+
+---
+```{python}
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+---
+
+# Song 3
+
+```{python, echo=FALSE}
+import librosa # very popular package to analyze audio files
+# Read the song
+audio = "classical.00001.wav" # waveform audio file
+data, sr = librosa.load(audio) # data has freqs, sr is sampling rate
+```
+
+```{r, echo=FALSE}
+library(htmltools)
+audio_file <- "classical.00001.wav"   # put the file in the same folder
+htmltools::tags$audio(
+  src = audio_file,
+  type = "audio/wav",
+  controls = NA
+)
+```
+
+```{python, echo=FALSE}
+# Wave form of the audio
+import matplotlib.pyplot as plt
+plt.figure(figsize=(7,4))
+librosa.display.waveshow(data,color="#2B4F72", alpha = 0.5);
+plt.ylabel('amplitude')
+plt.title('A classical piece')
+plt.show()
+```
+
+---
+```{python}
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+---
+
+
+# Song 4
+
+```{python, echo=FALSE}
+import librosa # very popular package to analyze audio files
+# Read the song
+audio = "country.00001.wav" # waveform audio file
+data, sr = librosa.load(audio) # data has freqs, sr is sampling rate
+```
+
+```{r, echo=FALSE}
+library(htmltools)
+audio_file <- "country.00001.wav"   # put the file in the same folder
+htmltools::tags$audio(
+  src = audio_file,
+  type = "audio/wav",
+  controls = NA
+)
+```
+
+```{python, echo=FALSE}
+# Wave form of the audio
+import matplotlib.pyplot as plt
+plt.figure(figsize=(7,4))
+librosa.display.waveshow(data,color="#2B4F72", alpha = 0.5);
+plt.ylabel('amplitude')
+plt.title('A country song')
+plt.show()
+```
+
+---
+```{python}
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+---
+
+# Song 5
+
+```{python, echo=FALSE}
+import librosa # very popular package to analyze audio files
+# Read the song
+audio = "disco.00001.wav" # waveform audio file
+data, sr = librosa.load(audio) # data has freqs, sr is sampling rate
+```
+
+```{r, echo=FALSE}
+library(htmltools)
+audio_file <- "disco.00001.wav"   # put the file in the same folder
+htmltools::tags$audio(
+  src = audio_file,
+  type = "audio/wav",
+  controls = NA
+)
+```
+
+```{python, echo=FALSE}
+# Wave form of the audio
+import matplotlib.pyplot as plt
+plt.figure(figsize=(7,4))
+librosa.display.waveshow(data,color="#2B4F72", alpha = 0.5);
+plt.ylabel('amplitude')
+plt.title('I Will Survive by Gloria Gaynor')
+plt.show()
+```
+
+---
+```{python}
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+---
+
+# Song 6
+
+```{python, echo=FALSE}
+import librosa # very popular package to analyze audio files
+# Read the song
+audio = "hiphop.00001.wav" # waveform audio file
+data, sr = librosa.load(audio) # data has freqs, sr is sampling rate
+```
+
+```{r, echo=FALSE}
+library(htmltools)
+audio_file <- "hiphop.00001.wav"   # put the file in the same folder
+htmltools::tags$audio(
+  src = audio_file,
+  type = "audio/wav",
+  controls = NA
+)
+```
+
+```{python, echo=FALSE}
+# Wave form of the audio
+import matplotlib.pyplot as plt
+plt.figure(figsize=(7,4))
+librosa.display.waveshow(data,color="#2B4F72", alpha = 0.5);
+plt.ylabel('amplitude')
+plt.title('A hiphop song')
+plt.show()
+```
+
+---
+```{python}
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+
+---
+
+# Song 7
+
+```{python, echo=FALSE}
+import librosa # very popular package to analyze audio files
+# Read the song
+audio = "jazz.00001.wav" # waveform audio file
+data, sr = librosa.load(audio) # data has freqs, sr is sampling rate
+```
+
+```{r, echo=FALSE}
+library(htmltools)
+audio_file <- "jazz.00001.wav"   # put the file in the same folder
+htmltools::tags$audio(
+  src = audio_file,
+  type = "audio/wav",
+  controls = NA
+)
+```
+
+```{python, echo=FALSE}
+# Wave form of the audio
+import matplotlib.pyplot as plt
+plt.figure(figsize=(7,4))
+librosa.display.waveshow(data,color="#2B4F72", alpha = 0.5);
+plt.ylabel('amplitude')
+plt.title('A jazz song')
+plt.show()
+```
+
+---
+```{python}
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+---
+
+# Song 8
+
+```{python, echo=FALSE}
+import librosa # very popular package to analyze audio files
+# Read the song
+audio = "metal.00001.wav" # waveform audio file
+data, sr = librosa.load(audio) # data has freqs, sr is sampling rate
+```
+
+```{r, echo=FALSE}
+library(htmltools)
+audio_file <- "metal.00001.wav"   # put the file in the same folder
+htmltools::tags$audio(
+  src = audio_file,
+  type = "audio/wav",
+  controls = NA
+)
+```
+
+```{python, echo=FALSE}
+# Wave form of the audio
+import matplotlib.pyplot as plt
+plt.figure(figsize=(7,4))
+librosa.display.waveshow(data,color="#2B4F72", alpha = 0.5);
+plt.ylabel('amplitude')
+plt.title('A metal song')
+plt.show()
+```
+
+---
+```{python}
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+
+---
+
+# Song 9
+
+```{python, echo=FALSE}
+import librosa # very popular package to analyze audio files
+# Read the song
+audio = "pop.00001.wav" # waveform audio file
+data, sr = librosa.load(audio) # data has freqs, sr is sampling rate
+```
+
+```{r, echo=FALSE}
+library(htmltools)
+audio_file <- "pop.00001.wav"   # put the file in the same folder
+htmltools::tags$audio(
+  src = audio_file,
+  type = "audio/wav",
+  controls = NA
+)
+```
+
+```{python, echo=FALSE}
+# Wave form of the audio
+import matplotlib.pyplot as plt
+plt.figure(figsize=(7,4))
+librosa.display.waveshow(data,color="#2B4F72", alpha = 0.5);
+plt.ylabel('amplitude')
+plt.title('A pop song')
+plt.show()
+```
+
+---
+```{python}
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+
+---
+
+# Song 10
+
+```{python, echo=FALSE}
+import librosa # very popular package to analyze audio files
+# Read the song
+audio = "reggae.00001.wav" # waveform audio file
+data, sr = librosa.load(audio) # data has freqs, sr is sampling rate
+```
+
+```{r, echo=FALSE}
+library(htmltools)
+audio_file <- "reggae.00001.wav"   # put the file in the same folder
+htmltools::tags$audio(
+  src = audio_file,
+  type = "audio/wav",
+  controls = NA
+)
+```
+
+```{python, echo=FALSE}
+# Wave form of the audio
+import matplotlib.pyplot as plt
+plt.figure(figsize=(7,4))
+librosa.display.waveshow(data,color="#2B4F72", alpha = 0.5);
+plt.ylabel('amplitude')
+plt.title('No Woman No Cry by Bob Marley')
+plt.show()
+```
+
+---
+```{python}
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+
+---
+
+# Song 11
+
+```{python, echo=FALSE}
+import librosa # very popular package to analyze audio files
+# Read the song
+audio = "rock.00026.wav" # waveform audio file
+data, sr = librosa.load(audio) # data has freqs, sr is sampling rate
+```
+
+```{r, echo=FALSE}
+library(htmltools)
+audio_file <- "rock.00026.wav"   # put the file in the same folder
+htmltools::tags$audio(
+  src = audio_file,
+  type = "audio/wav",
+  controls = NA
+)
+```
+
+```{python, echo=FALSE}
+# Wave form of the audio
+import matplotlib.pyplot as plt
+plt.figure(figsize=(7,4))
+librosa.display.waveshow(data,color="#2B4F72", alpha = 0.5);
+plt.ylabel('amplitude')
+plt.title('Radio Ga Ga by Queen')
+plt.show()
+```
+
+---
+```{python}
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+
+
+---
+
+# Bonus: A song covered by me!
+
+```{python, echo=FALSE}
+import librosa # very popular package to analyze audio files
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module="librosa")
+warnings.filterwarnings("ignore", category=FutureWarning, module="librosa")
+warnings.filterwarnings("ignore", message="PySoundFile failed")
+# Read the song
+audio = "happyjusttodance.m4a" # waveform audio file
+data, sr = librosa.load(audio) # data has freqs, sr is sampling rate
+```
+
+```{r, echo=FALSE}
+library(htmltools)
+audio_file <- "happyjusttodance.m4a"   # put the file in the same folder
+htmltools::tags$audio(
+  src = audio_file,
+  type = "audio/wav",
+  controls = NA
+)
+```
+
+```{python, echo=FALSE}
+# Wave form of the audio
+import matplotlib.pyplot as plt
+plt.figure(figsize=(7,4))
+librosa.display.waveshow(data,color="#2B4F72", alpha = 0.5);
+plt.ylabel('amplitude')
+plt.title('Happy Just to Dance With You')
+plt.show()
+```
+
+---
+```{python}
+# Spectrogram of the audio
+stft=librosa.stft(data)
+stft_db=librosa.amplitude_to_db(abs(stft))
+plt.figure(figsize=(7,4))
+librosa.display.specshow(stft_db,sr=sr,x_axis='time',y_axis='hz');
+plt.colorbar();
+```
+
+---
+
+<div style="font-size:10px; line-height:1">
+<style>
+.slide-specific pre code {
+  font-size: 10px !important;
+}
+</style>
+
+<div class="slide-specific">
+
+```{python,echo=FALSE}
+import warnings
+import librosa
+warnings.filterwarnings("ignore", message="librosa.beat.tempo")
+```
+
+```{python}
+import librosa
+import numpy as np
+import pandas as pd
+
+def extract_features(filename):
+    audio, sr = librosa.load(filename, duration=30)
+
+    # Important: use keyword arguments so it works with new librosa versions
+    tempo = librosa.beat.tempo(y=audio, sr=sr)[0]
+    chroma = np.mean(librosa.feature.chroma_stft(y=audio, sr=sr))
+    rmse = np.mean(librosa.feature.rms(y=audio))
+    centroid = np.mean(librosa.feature.spectral_centroid(y=audio, sr=sr))
+    bandwidth = np.mean(librosa.feature.spectral_bandwidth(y=audio, sr=sr))
+    rolloff = np.mean(librosa.feature.spectral_rolloff(y=audio, sr=sr))
+    zcr = np.mean(librosa.feature.zero_crossing_rate(y=audio))
+
+    mfcc_values = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=5)
+    mfcc1 = np.mean(mfcc_values[0])
+    mfcc2 = np.mean(mfcc_values[1])
+    mfcc3 = np.mean(mfcc_values[2])
+    mfcc4 = np.mean(mfcc_values[3])
+    mfcc5 = np.mean(mfcc_values[4])
+
+    return pd.Series({
+        "tempo": tempo,
+        "chroma": chroma,
+        "rmse": rmse,
+        "centroid": centroid,
+        "bandwidth": bandwidth,
+        "rolloff": rolloff,
+        "zero_crossing_rate": zcr,
+        "mfcc1": mfcc1,
+        "mfcc2": mfcc2,
+        "mfcc3": mfcc3,
+        "mfcc4": mfcc4,
+        "mfcc5": mfcc5
+    })
+
+# ---------------------------------------------------------------
+# Extract features for the songs
+blues = extract_features("/Users/eren/Downloads/Data/genres_original/blues/blues.00001.wav")
+classical = extract_features("/Users/eren/Downloads/Data/genres_original/classical/classical.00001.wav")
+jazz = extract_features("/Users/eren/Downloads/Data/genres_original/jazz/jazz.00001.wav")
+country = extract_features("/Users/eren/Downloads/Data/genres_original/country/country.00001.wav")
+disco = extract_features("/Users/eren/Downloads/Data/genres_original/disco/disco.00001.wav")
+rock = extract_features("/Users/eren/Downloads/Data/genres_original/rock/rock.00026.wav")
+recording = extract_features("/Users/eren/Downloads/happyjusttodance.m4a")
+
+songs_df = pd.DataFrame({
+    "blues": blues,
+    "classical": classical,
+    "jazz": jazz,
+    "country": country,
+    "disco": disco,
+    "rock": rock,
+    "recording": recording
+})
+```
+
+---
+
+```{python,echo=FALSE}
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = songs_df.copy()
+
+# reshape
+df_reset = df.reset_index().rename(columns={'index': 'feature'})
+df_long = df_reset.melt(id_vars='feature', var_name='genre', value_name='value')
+
+features = [
+    "tempo",
+    "chroma",
+    "rmse",
+    "centroid",
+    "bandwidth",
+    "rolloff",
+    "zero_crossing_rate"
+]
+
+sns.set_style("white")
+
+fig, axes = plt.subplots(nrows=4, ncols=2, figsize=(6, 9))
+axes = axes.flatten()
+
+# Strong, saturated palette
+palette = sns.color_palette("gnuplot2")   # bold, high contrast
+
+for i, feat in enumerate(features):
+    subset = df_long[df_long["feature"] == feat]
+
+    sns.barplot(
+        data=subset,
+        x="genre", y="value",
+        ax=axes[i],
+        palette=palette
+    )
+
+    axes[i].set_title(feat, fontsize=15)
+    axes[i].tick_params(axis='x', rotation=45)
+    axes[i].set_xlabel("")
+    axes[i].set_ylabel("")
+    axes[i].grid(False)
+    axes[i].set_facecolor("white")
+
+fig.delaxes(axes[-1])
+plt.tight_layout()
+plt.show()
+
+
+```
+
+---
+
+# Other interesting applications:
+
+- With text data, we said: Every author leaves a measurable statistical “signature.” (stylometry)
+  - Same is true with music!
+  - Note level analysis: number of notes, chords, changes in keys...
+- Genres over time? Has pop been the same over the last century?
+- Machine learning and AI: Google's Bach bot
+- Music and culture: The development of western music and eastern music
+- Music lyrics (text analysis)
+
+🤑 Music recommendation algorithms, song recognizer apps, eg, Shazam
+
+
